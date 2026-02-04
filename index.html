@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>💘 Valentine 💘</title>
+
   <style>
     body {
       height: 100vh;
@@ -11,70 +12,79 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+      font-family: 'Segoe UI', sans-serif;
       overflow: hidden;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     h1 {
       color: white;
-      margin-bottom: 30px;
       text-align: center;
-      z-index: 2;
+      font-size: 2.4rem;
+      margin-bottom: 40px;
+      animation: slideUp 1.5s ease forwards;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .buttons {
       position: relative;
-      width: 300px;
-      height: 150px;
-      z-index: 2;
+      width: 320px;
+      height: 160px;
     }
 
     button {
-      padding: 12px 25px;
+      padding: 14px 30px;
       font-size: 18px;
       border: none;
-      border-radius: 25px;
+      border-radius: 30px;
       cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
     }
 
     #yes {
-      background-color: #2ecc71;
-      color: white;
+      background: linear-gradient(135deg, #43e97b, #38f9d7);
       position: absolute;
       left: 40px;
-      bottom: 20px;
+      bottom: 25px;
     }
 
     #no {
-      background-color: #e74c3c;
+      background: linear-gradient(135deg, #ff6a88, #ff99ac);
       color: white;
       position: absolute;
       right: 40px;
-      bottom: 20px;
+      bottom: 25px;
     }
 
-    /* ❤️ Heart animation */
     .heart {
       position: absolute;
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 20px;
-      animation: floatUp 6s linear infinite;
+      font-size: 18px;
+      animation: floatUp 7s linear infinite;
+      pointer-events: none;
     }
 
     @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) scale(1.5);
-        opacity: 0;
-      }
+      from { transform: translateY(0); opacity: 0; }
+      to { transform: translateY(-110vh); opacity: 1; }
     }
   </style>
 </head>
-<body onclick="playMusic()">
+<body>
 
   <h1>Will you be my Valentine, Minakshi? ❤️</h1>
 
@@ -83,48 +93,33 @@
     <button id="no" onmouseover="moveNo()">NO 💔</button>
   </div>
 
-  <!-- 🎶 Background Music -->
-  <audio id="bgMusic" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-  </audio>
-
   <script>
     function moveNo() {
       const noBtn = document.getElementById("no");
-      const x = Math.random() * 200;
-      const y = Math.random() * 100;
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
+      noBtn.style.left = Math.random() * 220 + "px";
+      noBtn.style.top = Math.random() * 120 + "px";
     }
 
     function yesClicked() {
       document.body.innerHTML = `
-        <h1 style="color:white;">Yayyy! 💕<br>You made my Valentine special 😍</h1>
+        <h1 style="font-size:2.2rem; line-height:1.5;">
+          Yayyy! 💕<br><br>
+          Please msg me on WhatsApp<br>
+          if you accept 💖
+        </h1>
       `;
-      playMusic();
     }
 
-    function playMusic() {
-      const music = document.getElementById("bgMusic");
-      music.play();
-    }
-
-    // Floating hearts
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
       heart.innerHTML = "❤️";
       heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (Math.random() * 20 + 15) + "px";
-      heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
       document.body.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 6000);
+      setTimeout(() => heart.remove(), 7000);
     }
 
-    setInterval(createHeart, 300);
+    setInterval(createHeart, 400);
   </script>
 
 </body>
